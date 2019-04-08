@@ -1,24 +1,34 @@
 package com.example.hellosensor;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.support.v7.app.AlertDialog;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
+    Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     ImageView compass_img;
     TextView txt_compass;
     int mAzimuth;
+    int setAzimuth;
     private SensorManager mSensorManager;
     private Sensor mRotationV, mAccelerometer, mMagnetometer;
     boolean haveSensor = false, haveSensor2 = false;
@@ -29,10 +39,12 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     private boolean mLastAccelerometerSet = false;
     private boolean mLastMagnetometerSet = false;
     static final float ALPHA = 0.25f; // if ALPHA = 1 OR 0, no filter applies.
+    final Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setAzimuth = 350;
         setContentView(R.layout.activity_compass);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,8 +57,35 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                LayoutInflater layoutInflaterAndroid = LayoutInflater.from(c);
+                View mView = layoutInflaterAndroid.inflate(R.layout.input_dialog_box, null);
+                AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(c);
+                alertDialogBuilderUserInput.setView(mView);
+
+                final EditText InputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
+                alertDialogBuilderUserInput
+                        .setCancelable(false)
+                        .setPositiveButton("Set", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                int temp = Integer.parseInt(InputDialogEditText.getText().toString());
+                                if(temp >= 0 && temp <= 360){
+                                    setAzimuth = temp;
+                                } else{
+                                    Snackbar.make(findViewById(R.id.toolbar), "Value has to be between 0 and 360", Snackbar.LENGTH_LONG)
+                                            .setAction("Error, value not set.", null).show();
+                                }
+                            }
+                        })
+
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogBox, int id) {
+                                        dialogBox.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+                alertDialogAndroid.show();
             }
         });
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,7 +115,13 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         compass_img.setRotation(-mAzimuth);
 
         String where = "NW";
-
+        if (mAzimuth == setAzimuth){
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(200);
+            }
+        }
         if (mAzimuth >= 350 || mAzimuth <= 10)
             where = "N ";
         if (mAzimuth < 350 && mAzimuth > 280)
