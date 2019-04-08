@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hello Sensor</string>
+    <string name="title_activity_compass">Compass</string>
+    <string name="compass">COMPASS</string>
+    <string name="title_activity_accelerometer">Accelerometer</string>
+    <string name="compass_image">Compass image</string>
+</resources>
