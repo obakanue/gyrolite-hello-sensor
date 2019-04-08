@@ -15,16 +15,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.LayoutInflater;
-import android.support.v7.app.AlertDialog;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
-    Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+    Vibrator vibrator;
     ImageView compass_img;
     TextView txt_compass;
     int mAzimuth;
@@ -44,6 +42,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         setAzimuth = 350;
         setContentView(R.layout.activity_compass);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -58,7 +57,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             @Override
             public void onClick(View view) {
                 LayoutInflater layoutInflaterAndroid = LayoutInflater.from(c);
-                View mView = layoutInflaterAndroid.inflate(R.layout.input_dialog_box, null);
+                View mView = layoutInflaterAndroid.inflate(R.layout.compass_input_dialog_box, null);
                 AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(c);
                 alertDialogBuilderUserInput.setView(mView);
 
