@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,12 +39,14 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     private boolean mLastMagnetometerSet = false;
     static final float ALPHA = 0.25f; // if ALPHA = 1 OR 0, no filter applies.
     final Context c = this;
+    private boolean differenceChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        setAzimuth = 350;
+        setAzimuth = 360;
+        differenceChange = true;
         setContentView(R.layout.activity_compass);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,7 +73,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                                 if(temp >= 0 && temp <= 360){
                                     setAzimuth = temp;
                                 } else{
-                                    Snackbar.make(findViewById(R.id.toolbar), "Value has to be between 0 and 360", Snackbar.LENGTH_LONG)
+                                    Snackbar.make(findViewById(R.id.toolbar), "Value has to be between 0° and 360°.", Snackbar.LENGTH_LONG)
                                             .setAction("Error, value not set.", null).show();
                                 }
                             }
@@ -87,7 +90,12 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 alertDialogAndroid.show();
             }
         });
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         start();
     }
 
@@ -112,17 +120,23 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
         mAzimuth = Math.round(mAzimuth);
         compass_img.setRotation(-mAzimuth);
-
         String where = "NW";
-        if (mAzimuth == setAzimuth){
+
+        double difference = Math.sqrt(Math.pow(mAzimuth - setAzimuth, 2));
+
+        if (((difference <= 15 && difference >= -15) || difference >= 350) && differenceChange){
+            differenceChange = false;
             if (Build.VERSION.SDK_INT >= 26) {
                 vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
             } else {
                 vibrator.vibrate(200);
             }
+        } else if((!(difference < 15) || !(difference > -15)) && difference < 350){
+            differenceChange = true;
         }
-        if (mAzimuth >= 350 || mAzimuth <= 10)
+        if (mAzimuth >= 350 || mAzimuth <= 10){
             where = "N ";
+        }
         if (mAzimuth < 350 && mAzimuth > 280)
             where = "NW";
         if (mAzimuth <= 280 && mAzimuth > 260)
@@ -178,14 +192,9 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     }
 
     public void stop() {
-        if(haveSensor && haveSensor2){
-            mSensorManager.unregisterListener(this,mAccelerometer);
-            mSensorManager.unregisterListener(this,mMagnetometer);
-        }
-        else{
-            if(haveSensor)
-                mSensorManager.unregisterListener(this,mRotationV);
-        }
+        mSensorManager.unregisterListener(this,mAccelerometer);
+        mSensorManager.unregisterListener(this,mMagnetometer);
+        mSensorManager.unregisterListener(this,mRotationV);
     }
 
     @Override
@@ -206,5 +215,14 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             output[i] = output[i] + ALPHA * (input[i] - output[i]);
         }
         return output;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

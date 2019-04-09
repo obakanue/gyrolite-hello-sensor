@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Hello Sensor</string>
+    <string name="app_name">Gyrolite</string>
     <string name="title_activity_compass">Compass</string>
-    <string name="compass">COMPASS</string>
     <string name="title_activity_accelerometer">Accelerometer</string>
     <string name="compass_image">Compass image</string>
+    <string name="gyrolite_logo">Gyrolite Logo</string>
+    <string name="gyrolite_font">Gyrolite Font</string>
+    <string name="compass">COMPASS</string>
+    <string name="accelerometer">ACCELEROMETER</string>
+    <string name="gyrolite">GYROLITE</string>
 </resources>
