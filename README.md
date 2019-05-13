@@ -18,7 +18,7 @@ This is what adjusments where made to existing code.
 * A low-pass filter was used from here: [Low-Pass filter](https://www.built.io/blog/applying-low-pass-filter-to-android-sensor-s-readings)
 
 ## GYROLITE preview
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.54.40.png?raw=true" alt="App1"></p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.55.12.png?raw=true" alt="App2"></p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.04.png?raw=true" alt="App3"></p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.18.png?raw=true" alt="App4"></p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.54.40.png?raw=true"  style="width: 20%; height: 20%"</p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.55.12.png?raw=true" style="width: 20%; height: 20%"</p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.04.png?raw=true" style="width: 20%; height: 20%"</p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.18.png?raw=true" style="width: 20%; height: 20%"></p>
