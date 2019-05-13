@@ -19,6 +19,6 @@ This is what adjusments where made to existing code.
 
 ## GYROLITE preview
 <p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.54.40.png?raw=true"  width=" 40%" height=" 40%"</p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.55.12.png?raw=true" style="width: 20%; height: 20%"</p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.04.png?raw=true" style="width: 20%; height: 20%"</p>
-<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.18.png?raw=true" style="width: 20%; height: 20%"></p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.55.12.png?raw=true" width=" 40%" height=" 40%"</p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.04.png?raw=true" width=" 40%" height=" 40%"</p>
+<p style="text-align:center;"><img src="https://github.com/obakanue/gyrolite-hello-sensor/blob/master/Pictures/Skärmavbild%202019-04-10%20kl.%2000.57.18.png?raw=true" width=" 40%" height=" 40%"></p>
