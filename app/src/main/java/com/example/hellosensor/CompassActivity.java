@@ -131,7 +131,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             } else {
                 vibrator.vibrate(200);
             }
-        } else if((!(difference < 15) || !(difference > -15)) && difference < 350){
+        } else if((!(difference > 15) || !(difference < -15)) && difference < 350){
             differenceChange = true;
         }
         if (mAzimuth >= 350 || mAzimuth <= 10){
